@@ -29,7 +29,7 @@ Coder 437 это маленько приложение созданное для
 
 ## Сборки
 
-Как всегда готовая jar сборка тут
+Как всегда готовая jar сборка [тут](https://github.com/AlexanderPanshin/Coder437/blob/master/out/artifacts/Coder437_jar/Coder437.jar)
 Запускаеться двойным кликом или командой
 `java -jar Coder437.jar`
-Также exe файл тут
+Также exe файл [тут](https://github.com/AlexanderPanshin/Coder437/blob/master/out/artifacts/Coder437_jar/Coder437.exe)
