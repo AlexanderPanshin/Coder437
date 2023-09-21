@@ -17,6 +17,7 @@ public class RenameCp437 {
     public void activate(File file) {
         addOldname(file);
         try {
+            addNewName(file);
             renamecp437(file);
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
@@ -38,11 +39,9 @@ public class RenameCp437 {
         ) {
             if (f.isDirectory()) {
                 renamecp437(f);
-                newName.add(new String(f.getName().getBytes("Cp437"), "Cp866"));
                 System.out.println(f.renameTo(new File(f.getParent() + File.separator + new String(f.getName().getBytes("Cp437"), "Cp866"))));
             } else {
                 String[] mass = f.getName().split("\\.(?=[^.]+$)");
-                newName.add(new String(mass[0].getBytes("Cp437"), "Cp866") + "." + mass[1]);
                 System.out.println(f.renameTo(new File(f.getParent() + File.separator + new String(mass[0].getBytes("Cp437"), "Cp866") + "." + mass[1])));
 
             }
@@ -52,13 +51,24 @@ public class RenameCp437 {
     public void addOldname(File file) {
         File[] list = file.listFiles();
         assert list != null;
-        Arrays.stream(list).toList().forEach(System.out::println);
         for (File f : list) {
             if(f.isDirectory()){
                 addOldname(f);
                 oldName.add(f.getName());
             }else {
                 oldName.add(f.getName());
+            }
+        }
+    }
+    public void addNewName(File file) throws UnsupportedEncodingException {
+        File[] list = file.listFiles();
+        assert list != null;
+        for (File f : list) {
+            if(f.isDirectory()){
+                addNewName(f);
+                newName.add(new String(f.getName().getBytes("Cp437"), "Cp866"));
+            }else {
+                newName.add(new String(f.getName().getBytes("Cp437"), "Cp866"));
             }
         }
     }

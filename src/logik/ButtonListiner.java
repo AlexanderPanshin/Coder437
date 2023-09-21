@@ -3,6 +3,8 @@ package logik;
 import gui.MainPanel;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -44,11 +46,9 @@ public class ButtonListiner implements ActionListener {
         } else if (Objects.equals(e.getActionCommand(),"Rename")) {
             if (mp.getPt().getFileArea().getText() != null & !mp.getPt().getFileArea().getText().equals("") ){
                 renameCp437.activate(new File(mp.getPt().getFileArea().getText()));
-                for(int i = 0; i < renameCp437.getOldName().size(); i++){
-                    mp.getResultTable().getTable().getModel().setValueAt(renameCp437.getOldName().get(i), i,0);
-                }
                 for(int i = 0; i < renameCp437.getNewName().size(); i++){
-                    mp.getResultTable().getTable().getModel().setValueAt(renameCp437.getNewName().get(i), i,1);
+                    DefaultTableModel model = (DefaultTableModel) mp.getResultTable().getTable().getModel();
+                    model.insertRow(i, new String[]{renameCp437.getOldName().get(i), renameCp437.getNewName().get(i)});
                 }
 
             }
